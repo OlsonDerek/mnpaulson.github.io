@@ -16,6 +16,23 @@ function addTurn() {
     setTurnValues(turnString, turns);
 }
 
+// Converts the Memu to NOX
+function convertToNox() {
+  	// basic pattern
+    var pattern = /(\d+)--VINPUT--MULTI:1:(\d):(-?\d+):(-?\d+)/g;
+    // get the memu version
+    var str = document.getElementById("output").value;
+    // remove the last two digits of timing first
+    str = str.replace((/.{2}--VINPUT--/g), "--VINPUT--");
+    // replace the multi-inputs
+    var n = str.replace(pattern, "\$2|\$4|\$3|0|0|0|\$1|720|1280");  
+    // replace the mouse clicks (needs two)
+    var pattern2 = /(\d+)--VINPUT--MOUSE:(-?\d+):(-?\d+)/g;    
+    var n2 = n.replace(pattern2, "0|\$3|\$2|0|0|0|$1|720|1280" + "\n" + "1|\$3|\$2|0|0|0|$1|720|1280");
+    // write the output
+    document.getElementById("output").value = n2;
+}
+
 //Delete the most recent turn
 function delTurn() {
     if ($(".turn").length > 1) $(".turn").last().remove();

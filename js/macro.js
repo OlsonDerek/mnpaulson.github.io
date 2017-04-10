@@ -23,7 +23,7 @@ function convertToNox() {
     // get the memu version
     var str = document.getElementById("output").value;
     // remove the last two digits of timing first
-    str = str.replace((/.{2}--VINPUT--/g), "--VINPUT--");
+    str = str.replace((/.{3}--VINPUT--/g), "--VINPUT--");
     // replace the multi-inputs
     var n = str.replace(pattern, "\$2|\$4|\$3|0|0|0|\$1|720|1280");  
     // replace the mouse clicks (needs two)
